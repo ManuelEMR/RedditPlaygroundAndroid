@@ -1,9 +1,9 @@
 package com.manuelemr.redditapp.data.di
 
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.google.gson.*
 import com.manuelemr.redditapp.BuildConfig
+import com.manuelemr.redditapp.data.foundation.DateSerializer
+import com.manuelemr.redditapp.data.foundation.TokenInterceptor
 import com.manuelemr.redditapp.data.modules.posts.PostsAPI
 import com.manuelemr.redditapp.data.modules.posts.PostsRepository
 import okhttp3.OkHttpClient
@@ -11,6 +11,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.reflect.Type
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 private const val BaseUrl = "https://oauth.reddit.com/"
@@ -18,6 +20,7 @@ val dataModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+            .addInterceptor(TokenInterceptor(get()))
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
@@ -34,6 +37,7 @@ val dataModule = module {
 
     single {
         GsonBuilder()
+            .registerTypeAdapter(Date::class.java, DateSerializer())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create()
     }

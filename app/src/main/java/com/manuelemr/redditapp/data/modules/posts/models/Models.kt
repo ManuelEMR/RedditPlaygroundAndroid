@@ -26,7 +26,7 @@ data class Listing<T>(
 data class PostModel(
     val title: String,
     val author: String,
-    val created: Double,
+    val created: Long,
     val thumbnail: String?,
     val numComments: Int,
     val name: String

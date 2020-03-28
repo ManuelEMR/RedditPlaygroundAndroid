@@ -15,7 +15,7 @@ val presentationModule = module {
 
     //region ViewModels
 
-    viewModel { PostsViewModel() }
+    viewModel { PostsViewModel(get()) }
 
     //endregion
 }

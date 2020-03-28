@@ -66,6 +66,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
+    // Result
+    implementation "com.github.kittinunf.result:result:$rootProject.resultVersion" //for jvm
+    implementation "com.github.kittinunf.result:result-coroutines:$rootProject.resultVersion"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -36,4 +36,5 @@ ext {
     archLifecycleVersion = "1.1.1"
     interceptorVersion = '4.3.1'
     gsonVersion = '2.8.6'
+    resultVersion = "2.2.0"
 }
