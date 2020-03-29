@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RedditApp</string>
     <string name="post_created_at_format">%1$d hours ago</string>
+    <string name="menu_delete_all">delete</string>
 </resources>

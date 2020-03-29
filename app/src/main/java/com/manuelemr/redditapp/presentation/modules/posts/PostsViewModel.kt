@@ -47,4 +47,8 @@ class PostsViewModel(private val postsRepository: PostsRepository,
             _loading.postValue(false)
         }
     }
+
+    fun deleteAll() {
+        _posts.postValue(emptyList())
+    }
 }

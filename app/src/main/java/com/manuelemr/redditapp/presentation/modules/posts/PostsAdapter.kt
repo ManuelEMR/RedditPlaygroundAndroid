@@ -23,6 +23,10 @@ class PostsAdapter(private val onPostClickListener: (Post) -> Unit): RecyclerVie
             notifyDataSetChanged()
         }
 
+    fun setItemsNoUpdate(items: List<Post>) {
+        _items = items
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
             .let { ViewHolder(it) }
