@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        showFirstScreen()
+        if (savedInstanceState == null) {
+            showFirstScreen()
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

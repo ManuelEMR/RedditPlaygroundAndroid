@@ -25,6 +25,10 @@ class PostsViewModel(private val postsRepository: PostsRepository,
     val loading: LiveData<Boolean> = _loading
     val needsToLogin: LiveData<String> = _needsToLogin
 
+    init {
+        getPosts()
+    }
+
     fun getPosts() {
         _loading.postValue(true)
         viewModelScope.launch {
