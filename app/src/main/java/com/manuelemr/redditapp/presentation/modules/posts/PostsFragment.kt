@@ -1,5 +1,7 @@
 package com.manuelemr.redditapp.presentation.modules.posts
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 
 import com.manuelemr.redditapp.R
+import com.manuelemr.redditapp.presentation.modules.posts.models.Post
 import kotlinx.android.synthetic.main.fragment_posts.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +33,11 @@ class PostsFragment : Fragment(R.layout.fragment_posts) {
     }
 
     private fun setupViews() {
-        postsList.adapter = PostsAdapter().also { adapter = it }
+        postsList.adapter = PostsAdapter(::onPostClick).also { adapter = it }
+
+        refreshLayout.setOnRefreshListener {
+            viewModel.getPosts()
+        }
     }
 
     private fun setupBindings() {
@@ -42,6 +49,20 @@ class PostsFragment : Fragment(R.layout.fragment_posts) {
 
         viewModel.loading.observe(viewLifecycleOwner) {
             progressBar.isVisible = it
+        }
+
+        viewModel.needsToLogin.observe(viewLifecycleOwner) {
+            Intent(Intent.ACTION_VIEW)
+                .apply { data = Uri.parse(it) }
+                .let { startActivity(it) }
+        }
+    }
+
+    private fun onPostClick(post: Post) {
+        post.thumbnail?.let {
+            Intent(Intent.ACTION_VIEW)
+                .apply { data = Uri.parse(it) }
+                .let { startActivity(it) }
         }
     }
 }

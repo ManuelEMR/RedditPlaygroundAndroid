@@ -1,8 +1,6 @@
 package com.manuelemr.redditapp.data.di
 
 import com.google.gson.*
-import com.manuelemr.redditapp.BuildConfig
-import com.manuelemr.redditapp.data.foundation.DateSerializer
 import com.manuelemr.redditapp.data.foundation.TokenInterceptor
 import com.manuelemr.redditapp.data.modules.posts.PostsAPI
 import com.manuelemr.redditapp.data.modules.posts.PostsRepository
@@ -11,7 +9,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Type
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -37,7 +34,6 @@ val dataModule = module {
 
     single {
         GsonBuilder()
-            .registerTypeAdapter(Date::class.java, DateSerializer())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create()
     }

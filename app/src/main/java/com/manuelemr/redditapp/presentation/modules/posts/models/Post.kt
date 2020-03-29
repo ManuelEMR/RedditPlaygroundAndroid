@@ -13,7 +13,7 @@ data class Post(
 ) {
     constructor(model: PostModel):this(model.title,
         model.author,
-        Date(model.created),
+        Date(model.created * 1000),
         model.thumbnail,
         model.numComments.toString(),
         false)
